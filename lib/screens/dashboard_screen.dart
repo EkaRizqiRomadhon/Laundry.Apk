@@ -66,14 +66,26 @@ class DashboardScreen extends StatelessWidget {
                   )
                 else
                   ...provider.limaTerakhir.map((transaksi) => Card(
-                    margin: const EdgeInsets.only(bottom: 8),
+                    margin: const EdgeInsets.only(bottom: 10),
                     child: ListTile(
-                      leading: const Icon(Icons.person),
-                      title: Text(transaksi.namaPelanggan),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                      leading: CircleAvatar(
+                        backgroundColor: const Color(0xFF0277BD).withOpacity(0.1),
+                        foregroundColor: const Color(0xFF0277BD),
+                        child: const Icon(Icons.person),
+                      ),
+                      title: Text(
+                        transaksi.namaPelanggan, 
+                        style: const TextStyle(fontWeight: FontWeight.w600)
+                      ),
                       subtitle: Text(transaksi.jenisLaundry),
                       trailing: Text(
                         currencyFormatter.format(transaksi.total),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xFF0277BD),
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                   )).toList(),
@@ -87,22 +99,29 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildInfoCard(BuildContext context, String title, String value, IconData icon, Color color) {
     return Card(
-      elevation: 2,
+      // Elevation dan rounded corners sudah diatur dari main.dart
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: color, size: 32),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: color, size: 28),
+            ),
             const SizedBox(height: 16),
             Text(
               value,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
             Text(
               title,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              style: const TextStyle(fontSize: 13, color: Colors.black54, height: 1.2),
             ),
           ],
         ),
